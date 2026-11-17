@@ -1,0 +1,20 @@
+
+====================================
+        LOGIN REALIZADO
+====================================
+Usuário: murillo@gmail.com
+Data: 17/11/2026
+Horário: 16:21:35
+Status: Acesso realizado com sucesso
+====================================
+
+
+====================================
+        LOGIN REALIZADO
+====================================
+Usuário: murillo@gmail.com
+Data: 17/11/2026
+Horário: 16:22:51
+Status: Acesso realizado com sucesso
+====================================
+

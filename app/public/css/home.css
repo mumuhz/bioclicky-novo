@@ -8,11 +8,9 @@
     min-height: 100dvh;
     font-family: "Inter", sans-serif;
     background:
-        radial-gradient(
-            circle at 92% 35%,
+        radial-gradient(circle at 92% 35%,
             rgba(19, 184, 91, 0.08),
-            transparent 25%
-        ),
+            transparent 25%),
         #09121c;
     color: #ffffff;
 }
@@ -219,6 +217,561 @@
 .home-login:hover {
     border-color: #16b858;
     background: #172b24;
+}
+
+
+/* ========================================
+   LOGIN - VARIÁVEIS DO TEMA
+======================================== */
+
+body:has(.login) {
+    margin: 0;
+}
+
+html:has(.login) {
+    min-height: 100%;
+}
+
+.login {
+    --verde: #13a34a;
+    --verde-hover: #0e913e;
+    --fundo: #ffffff;
+    --texto: #111827;
+    --texto-secundario: #64748b;
+    --campo-fundo: #ffffff;
+    --campo-borda: #dce3ed;
+    --painel: #126c38;
+    --seguranca: rgba(255, 255, 255, .10);
+
+    display: grid;
+    grid-template-columns: 1.16fr 1fr;
+    min-height: 100vh;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background .3s, color .3s;
+}
+
+/* TEMA ESCURO */
+
+.login[data-tema="escuro"],
+[data-tema="escuro"] .login {
+    --fundo: #101922;
+    --texto: #f8fafc;
+    --texto-secundario: #a1b3c8;
+    --campo-fundo: #101922;
+    --campo-borda: #293949;
+    --painel: #084c2c;
+}
+
+/* RESET SOMENTE DO LOGIN */
+
+.login,
+.login * {
+    box-sizing: border-box;
+}
+
+.login a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.login button,
+.login input {
+    font: inherit;
+}
+
+/* ========================================
+   ESTRUTURA PRINCIPAL
+======================================== */
+
+.login__conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 30px;
+    background: var(--fundo);
+    transition: background .3s;
+}
+
+.login__container {
+    width: 100%;
+    max-width: 380px;
+}
+
+/* ========================================
+   LOGOTIPO
+======================================== */
+
+.login__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+}
+
+.login__logo-icone {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    background: var(--verde);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    transform: rotate(-5deg);
+}
+
+.login__logo-texto {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--texto);
+}
+
+.login__logo-texto span {
+    color: var(--verde);
+}
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.login__cabecalho {
+    margin-bottom: 34px;
+}
+
+.login__boas-vindas {
+    display: inline-block;
+    color: var(--verde);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    border-top: 1px solid var(--verde);
+    padding-top: 3px;
+    margin-bottom: 22px;
+}
+
+.login__titulo {
+    font-size: 35px;
+    font-weight: 500;
+    letter-spacing: -1.3px;
+    margin-bottom: 15px;
+    color: var(--texto);
+}
+
+.login__descricao {
+    font-size: 13px;
+    color: var(--texto-secundario);
+}
+
+/* ========================================
+   CAMPOS DO FORMULÁRIO
+======================================== */
+
+.login__campos {
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.login__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.login__campo input {
+    width: 100%;
+    height: 49px;
+    padding: 0 14px;
+
+    border: 1px solid var(--campo-borda);
+    border-radius: 10px;
+    outline: none;
+
+    background: var(--campo-fundo);
+    color: var(--texto);
+
+    font-size: 13px;
+    transition: border .2s, background .3s;
+}
+
+.login__campo input::placeholder {
+    color: #8293a9;
+}
+
+.login__campo input:focus {
+    border-color: var(--verde);
+}
+
+/* ========================================
+   CAMPO DE SENHA
+======================================== */
+
+.login__senha {
+    position: relative;
+    display: block;
+}
+
+.login__senha input {
+    padding-right: 45px;
+}
+
+.login__mostrar-senha {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+    color: var(--texto-secundario);
+
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ========================================
+   OPÇÕES DO LOGIN
+======================================== */
+
+.login__opcoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 16px 0 19px;
+    font-size: 11px;
+}
+
+.login__lembrar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--texto-secundario);
+    cursor: pointer;
+}
+
+.login__lembrar input {
+    accent-color: var(--verde);
+    cursor: pointer;
+}
+
+.login__opcoes > a {
+    color: var(--verde);
+    font-weight: 700;
+}
+
+/* ========================================
+   BOTÃO ENTRAR
+======================================== */
+
+.login__botao {
+    width: 100%;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--verde);
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 20px rgba(19, 163, 74, .15);
+    transition: background .2s, transform .2s;
+}
+
+.login__botao:hover {
+    background: var(--verde-hover);
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   CADASTRO E TERMOS
+======================================== */
+
+.login__cadastro {
+    text-align: center;
+    margin-top: 27px;
+
+    color: var(--texto);
+    font-size: 12px;
+}
+
+.login__cadastro a {
+    color: var(--verde);
+    font-weight: 700;
+}
+
+.login__termos {
+    max-width: 360px;
+    margin: 28px auto 0;
+
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.6;
+
+    color: var(--texto-secundario);
+}
+
+.login__termos a {
+    color: var(--texto-secundario);
+}
+
+/* ========================================
+   PAINEL VERDE
+======================================== */
+
+.login__painel {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: calc(100vh - 15px);
+    margin: 15px 15px 0 0;
+    padding: 90px 80px 34px;
+
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+
+    background: var(--painel);
+    color: #ffffff;
+
+    transition: background .3s;
+}
+
+.login__painel::before {
+    content: "";
+
+    position: absolute;
+    width: 430px;
+    height: 430px;
+
+    top: -240px;
+    right: -180px;
+
+    border-radius: 50%;
+    border: 90px solid rgba(255, 255, 255, .045);
+
+    pointer-events: none;
+}
+
+/* ========================================
+   ALTERNADOR DE TEMA
+======================================== */
+
+.login__temas {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 4px;
+    border-radius: 12px;
+
+    background: var(--fundo);
+}
+
+.login__tema {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: var(--texto-secundario);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: .2s;
+}
+
+.login__tema.ativo {
+    background: var(--fundo);
+    color: var(--texto);
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .10);
+}
+
+/* ========================================
+   TEXTO DO PAINEL
+======================================== */
+
+.login__mensagem {
+    position: relative;
+    z-index: 1;
+}
+
+.login__etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #7cf0a1;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    margin-bottom: 22px;
+}
+
+.login__etiqueta::before {
+    content: "";
+
+    width: 23px;
+    height: 2px;
+
+    background: #a6f5be;
+}
+
+.login__mensagem h2 {
+    font-size: 48px;
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: -2px;
+
+    margin-bottom: 22px;
+}
+
+.login__mensagem p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* ========================================
+   AVISO DE SEGURANÇA
+======================================== */
+
+.login__seguranca {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    padding: 20px 18px;
+
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 12px;
+
+    background: var(--seguranca);
+}
+
+.login__seguranca-icone {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .12);
+
+    font-size: 20px;
+}
+
+.login__seguranca-texto h3 {
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.login__seguranca-texto p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, .75);
+}
+
+/* ========================================
+   RESPONSIVIDADE - TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+    .login {
+        grid-template-columns: 1.16fr 1fr;
+    }
+
+    .login__painel {
+        padding: 100px 35px 30px;
+    }
+
+    .login__mensagem h2 {
+        font-size: 38px;
+    }
+}
+
+/* ========================================
+   RESPONSIVIDADE - CELULAR
+======================================== */
+
+@media (max-width: 750px) {
+    .login {
+        grid-template-columns: 1fr;
+    }
+
+    .login__conteudo {
+        padding: 40px 25px;
+        min-height: 100vh;
+    }
+
+    .login__container {
+        max-width: 420px;
+    }
+
+    .login__logo {
+        margin-bottom: 55px;
+    }
+
+    .login__painel {
+        display: none;
+    }
+}
+
+/* ========================================
+   CELULARES PEQUENOS
+======================================== */
+
+@media (max-width: 400px) {
+    .login__titulo {
+        font-size: 29px;
+    }
+
+    .login__opcoes {
+        font-size: 10px;
+    }
 }
 
 
@@ -497,7 +1050,7 @@
 }
 
 
-.home-product > img {
+.home-product>img {
     width: 100%;
     height: 100%;
 
@@ -2351,17 +2904,13 @@ body.home-light-mode .home-acessibilidade {
     border-radius: 16px;
 
     background:
-        radial-gradient(
-            circle at 95% 0%,
+        radial-gradient(circle at 95% 0%,
             rgba(51, 205, 111, 0.13),
-            transparent 24%
-        ),
-        linear-gradient(
-            135deg,
+            transparent 24%),
+        linear-gradient(135deg,
             #0c5a32,
             #087936 55%,
-            #087d39
-        );
+            #087d39);
 }
 
 

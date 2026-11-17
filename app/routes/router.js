@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+const fs = require("fs");
+const path = require("path");
+
 // Dados provisórios para o protótipo. Depois podem vir do MySQL.
 const medicamentos = [{
         id: 101,
@@ -213,19 +216,59 @@ router.get("/login", (req, res) => {
     res.render("pages/login", { erro: null });
 });
 // Recebe o formulário de /login.
-router.post("/login", (req, res) => {
-    const {
-        email,
-        senha
-    } = req.body;
-    if (!email || !senha) return res.status(400).render("pages/login", {
-        erro: "Preencha o e-mail e a senha."
-    });
+
+// Recebe o formulário de /login.
+router.post("/login", async (req, res) => {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+        return res.status(400).render("pages/login", {
+            erro: "Preencha o e-mail e a senha."
+        });
+    }
+
+    // Cria a sessão provisória do usuário.
     req.session.usuarioId = 1;
     req.session.usuarioNome = email.split("@")[0];
     req.session.usuarioEmail = email;
-    res.redirect("/perfil");
+
+    // Caminho do arquivo TXT na pasta principal do projeto.
+    const arquivoBanco = path.join(
+        process.cwd(),
+        "banco de dados.txt"
+    );
+
+    // Informações do acesso.
+    const registro = `
+====================================
+        LOGIN REALIZADO
+====================================
+Usuário: ${email}
+Data: ${new Date().toLocaleDateString("pt-BR")}
+Horário: ${new Date().toLocaleTimeString("pt-BR")}
+Status: Acesso realizado com sucesso
+====================================
+
+`;
+
+    try {
+        // Adiciona o registro sem apagar os anteriores.
+        await fs.promises.appendFile(
+            arquivoBanco,
+            registro,
+            "utf8"
+        );
+
+        console.log("Login registrado no banco de dados.txt");
+
+        return res.redirect("/perfil");
+
+    } catch (erro) {
+        console.error("Erro ao registrar login:", erro);
+        return res.status(500).send("Erro ao registrar o acesso.");
+    }
 });
+
 
 // Exibe a página /cadastro.
 router.get("/cadastro", (req, res) => res.render("pages/cadastro", {
